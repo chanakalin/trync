@@ -1,0 +1,6 @@
+[submodule "trync-agent/components/esp-mqtt"]
+	path = trync-agent/components/esp-mqtt
+	url = https://github.com/256dpi/esp-mqtt.git
+[submodule "trync-agent/components/paho.mqtt.embedded-c"]
+	path = trync-agent/components/paho.mqtt.embedded-c
+	url = https://github.com/eclipse/paho.mqtt.embedded-c.git
