@@ -1,0 +1,16 @@
+/**Gateway**/
+.gateway {
+	padding: 15px;
+	margin:2% 2% 0% 2%;
+	border: 2px solid #020b19;
+	border-radius: 10px;
+}
+.gateway .gwinfo{
+	font-size:11px;
+}
+.gateway .gwenabled{
+	color : green;
+}
+.gateway .gwdisabled{
+	color:red;
+}

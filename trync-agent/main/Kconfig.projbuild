@@ -1,0 +1,8 @@
+menu "TRYNCA Serial"
+
+config TRYNCA_SERIAL
+    string "Unique serial number of the TRYNC-Agent"
+	default 000000
+	help
+		Set the serial number of the TRYNC-Agent (must be unique)
+endmenu

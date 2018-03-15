@@ -1,0 +1,52 @@
+<div ng-controller="ctrlGateway" ng-init="loadGateways()">
+	<br /> <br />
+	<div class="container">
+		<div class="row">
+			<div ng-repeat="gateway in gateways" class="gateway col col-sm-3">
+				<div class="h2" ng-class="gateway.status[0] ? 'gwenabled' : 'gwdisabled'">{{gateway.gwname[0]}}</div>
+				<table class="gwinfo">
+					<tr>
+						<td valign="top" align="left" width="40%">Display name</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left">{{gateway.display_name[0]}}</td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Account name</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left">{{gateway.accname[0]}}</td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Connection IPs</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left"><span
+							ng-repeat="ip in gateway.connection_ip[0].split(',')">{{ip}}<br /></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Interfaces</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left"><span
+							ng-repeat="ifc in gateway.connection_interface[0].split(',')">{{ifc}}<br /></span></td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Model</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left">{{gateway.model_id[0]}}</td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Serial</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left">{{gateway.serial_number[0]}}</td>
+					</tr>
+					<tr>
+						<td valign="top" align="left">Status</td>
+						<td valign="top" align="center">:</td>
+						<td valign="top" align="left" ng-class="gateway.status[0] ? 'gwenabled' : 'gwdisabled'"><span
+							ng-show="gateway.status[0]" >Connected</span> <span
+							ng-hide="gateway.status[0]">Disconnected</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" configuration-policy="require" deactivate="deactivate" modified="updated" immediate="true"  name="org.trync.trynca.msgagent.MsgAgent">
+   <implementation class="org.trync.trynca.msgagent.MsgAgent"/>
+   <service><provide interface="org.eclipse.kura.configuration.ConfigurableComponent"/></service>
+   <property name="service.pid" type="String" value="org.trync.trynca.msgagent.MsgAgent"/>
+   <!--<reference cardinality="1..1" interface="org.trync.trynca.pairagent.PairAgent" name="PairAgent" policy="static"/>-->
+</scr:component>

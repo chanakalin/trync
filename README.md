@@ -1,2 +1,4 @@
 # trync
-Open source IoT powered application for maintaining saturated environmental conditions in medical storage and transporation
+**trync** is an open source IoT powered application for logging environmetal conditions and maintaining saturated environmental conditions in medical storage and transporation.
+
+

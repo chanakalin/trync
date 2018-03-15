@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Kicad-MicroSD)(type KiCad)(uri /stuff/PROJECTS/KICAD/Kicad-MicroSD)(options "")(descr ""))
+)

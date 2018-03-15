@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TRYNC</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="images/trync-icon.png">
+<!-- JQuery -->
+<script src="libs/jquery/jquery-3.3.1.js"></script>
+<!-- bootstrap -->
+<script src="libs/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
+<link rel="stylesheet"
+	href="libs/bootstrap-4.0.0-dist/css/bootstrap.css">
+<!-- CSS -->
+<link rel="stylesheet" href="css/loadingMask.css">
+<link rel="stylesheet" href="css/style.css">
+<!-- octicons -->
+<link rel="stylesheet" href="libs/octicons-6.0.1/lib/octicons.css">
+<!-- AngularJS -->
+<script src="libs/angular-1.6.9/angular.js"></script>
+<script src="libs/angular-1.6.9/angular-cookies.js"></script>
+<script src="libs/angular-1.6.9/angular-route.js"></script>
+<!-- AngularJS app -->
+<script type="text/javascript">	var tryncapp = angular.module("tryncApp", ["ngRoute","ngCookies"]);</script>
+<!-- NG controllers -->
+<script src="js/ng-ctrl/ctrlLogin.js"></script>
+<script src="js/ng-ctrl/ctrlIndex.js"></script>
+<script src="js/ng-ctrl/ctrlChangePassword.js"></script>
+<script src="js/ng-ctrl/ctrlGateway.js"></script>
+</head>
+<body ng-app="tryncApp">
+	<!-- Loading mask -->
+	<div class="loadingMask" ng-show="$root.showLoading"></div>
+	<!-- Loading mask end -->
+	<!-- Navbar -->
+	<div ng-controller="ctrlIndex">
+		<nav
+			class="navbar navbar-expand-sm navbar-expand-lg  bg-light navbar-light"">
+			<a class="navbar-brand" href="#!/home"> <img
+				src="images/trync-logo.150.png" alt="logo" style="width: 120px;">
+			</a>
+			<ul class="navbar-nav" ng-show="$root.loggedUserId > 0">
+				<li class="nav-item"><a class="nav-link" href="#!/home">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="#!gateway">Gateway</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto col col-3" ng-show="$root.loggedUserId > 0">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle navbar-toggler-left" href="http://example.com"
+					id="userDropDown" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><img
+						src="libs/octicons-6.0.1/lib/svg/person.svg"> Hi,
+						{{$root.loggedUserFullName}} </a>
+					<div class="dropdown-menu" aria-labelledby="userDropDown">
+						<a class="dropdown-item" href="#!/changepassword">Change Password</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#" ng-click="logout()">Logout</a>
+					</div></li>
+			</ul>
+		</nav>
+	</div>
+	<!-- Navbar end -->
+	<!-- View -->
+	<div class="container-fluid" ng-view></div>
+	<!-- View end -->
+</body>
+<!-- AngularJS application -->
+<script>
+	tryncapp.config(function($routeProvider) {
+	    $routeProvider
+	    .when("/home", {
+	        templateUrl : "pages/home.html"
+	        //controller : "ctrlHome"
+	    })
+	    .when("/login", {
+	        templateUrl : "pages/login.html",
+	        controller : "ctrlLogin"
+	    })
+	    .when("/changepassword", {
+	        templateUrl : "pages/changepassword.html",
+	        controller : "ctrlChangePassword"
+	    })
+	    .when("/gateway", {
+	        templateUrl : "pages/gateway.html",
+	        controller : "ctrlGateway"
+	    })
+	    .otherwise({
+	  	  redirectTo: '/home' //default location
+	    })
+	}).run( function($rootScope, $location,$http) {
+		//on route change
+		$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+			//show loading
+			$rootScope.showLoading = true;
+			//validate login on transition
+			// check login with http session
+			if($rootScope.loggedUserId==undefined || $rootScope.loggedUserId<=0){
+				$http({
+						method 	: "GET",
+						url		: "rest/user/islogged",
+						headers	: {
+							   "Content-Type": "application/json; charset=utf-8"
+						},
+						responseType	: "json"					
+				}).then(function successCallback(response) {
+						if(response.data.uid==undefined){
+							$location.path( "/login" );
+						}else{
+							$rootScope.loggedUserId = response.data.uid[0];
+							$rootScope.loggedUserGid = response.data.gid[0];
+					    	$rootScope.loggedUserFullName = response.data.fullname[0];
+					    	if ( !($rootScope.loggedUserId > 0) ) {//if not logged go to login
+					        	if ( next.templateUrl == "pages/login.html" ) {
+					        	} else {
+					          		$location.path( "/login" );
+					        	}
+					      	}	
+						}
+				  }, function errorCallback(response) {
+					  console.log(response.data.error[0]);
+				  });
+				$rootScope.showLoading = false;//hide mask
+			}     	
+		});
+		$rootScope.$on( "$routeChangeSuccess", function(event, next, current) {
+			//hide loading
+			$rootScope.showLoading = false;
+		});
+		$rootScope.$on( "$routeUpdate", function(event, next, current) {
+			//hide loading
+			$rootScope.showLoading = false;
+		});
+		
+	});
+	</script>
+
+
+</body>
+</html>

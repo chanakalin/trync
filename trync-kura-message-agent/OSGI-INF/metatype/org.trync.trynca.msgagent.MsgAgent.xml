@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaData xmlns="http://www.osgi.org/xmlns/metatype/v1.2.0"
+	localization="en_us">
+	<OCD id="org.trync.trynca.msgagent.MsgAgent" name="TRYNC Message Agent"
+		description="Trync agent (trynca) to gateway mqtt message agent">
+
+		<AD id="mqttbroker" name="mqttbroker" type="String"
+			cardinality="0" required="true" default="172.16.1.1" description="MQTT broker for Trync agent" />
+
+		<AD id="mqttuser" name="mqttuser" type="String"
+			cardinality="0" required="true" default="trynca-user"
+			description="MQTT broker user for Trync agent" />
+
+		<AD id="mqttpasswd" name="mqttpasswd" type="String"
+			cardinality="0" required="true" default="trynca-passwd"
+			description="MQTT broker password for Trync agent" />
+	</OCD>
+
+	<Designate pid="org.trync.trynca.msgagent.MsgAgent">
+		<Object ocdref="org.trync.trynca.msgagent.MsgAgent" />
+	</Designate>
+</MetaData>

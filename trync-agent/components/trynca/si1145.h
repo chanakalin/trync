@@ -1,0 +1,10 @@
+#define SI1145_TAG "SI1145"
+#define	SI1145_ADDRESS 0x60
+
+enum{
+	SI1145_REGISTER_PART_ID = 0x00,
+	SI1145_REGISTER_HW_KEY = 0x07
+};
+
+
+esp_err_t si1145_init();

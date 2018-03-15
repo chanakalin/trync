@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaData xmlns="http://www.osgi.org/xmlns/metatype/v1.2.0"
+	localization="en_us">
+	<OCD id="org.trync.trynca.pairagent.PairAgent" name="TRYNC PairAgent"
+		description="Trync agent (trynca) to gateway pairing agent configurations">
+
+		<AD id="wifissid" name="wifissid" type="String"
+			cardinality="0" required="true" default="kura-gw.trync.org"
+			description="WiFi SSID for Trync agent" />
+
+		<AD id="wifipassword" name="wifipassword" type="String"
+			cardinality="0" required="true" default="kura-gw.trync.org"
+			description="WiFi password for Trync agent" />
+
+		<AD id="mqttbroker" name="mqttbroker" type="String"
+			cardinality="0" required="true" default="172.16.1.1" description="MQTT broker for Trync agent" />
+
+		<AD id="mqttuser" name="mqttuser" type="String"
+			cardinality="0" required="true" default="trynca-user"
+			description="MQTT broker user for Trync agent" />
+
+		<AD id="mqttpasswd" name="mqttpasswd" type="String"
+			cardinality="0" required="true" default="trynca-passwd"
+			description="MQTT broker password for Trync agent" />
+	</OCD>
+
+	<Designate pid="org.trync.trynca.pairagent.PairAgent">
+		<Object ocdref="org.trync.trynca.pairagent.PairAgent" />
+	</Designate>
+</MetaData>
